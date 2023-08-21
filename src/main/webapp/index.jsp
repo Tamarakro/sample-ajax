@@ -1,5 +1,6 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<%
+int n = Integer.parseInt(request.getParameter("val"));
+for(int i = 1; i<=10;i++)
+    out.print(i*n+"<br>");
+
+%>
