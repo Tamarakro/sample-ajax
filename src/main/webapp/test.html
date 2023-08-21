@@ -1,47 +1,92 @@
-<!DOCTYPE html>
+
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script>
-var request;
-function sendInfo()
-{
-        var v = document.incrform.t1.value;
-        var url = "index.jsp?val=" +v;
-        if(window.XMLHttpRequest){
-            request=new XMLHttpRequest();
-        }
-        else if(window.ActiveXObject){
-            request=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        try
-        {
-            request.onreadystatechange = getInfo;
-            request.open("GET", url,true);
-            request.send();
-        }
-        catch(e)
-        }
-            alert("Unable to connect to server");
-        }
-}
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 
-function getInfo(){
-        if(request.readyState==4){
-            var val = request.responseText;
-            document.getElementById('sid').innerHTML = val;
-        }
-}
-    </script>
+    <style>
+    
+
+  .scrolling-text {
+    background-color: red;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    animation: scroll-left 20s linear infinite;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .scrolling-text2 {
+    background-color: green;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    animation: scroll-right 20s linear infinite;
+  }
+
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+
 </head>
 <body>
-    <marquee><h1>This is an example of AJAX</h1>
-    </marquee>
+<div class="scrolling-text"><h1>This is first example of AJAX</h1></div>
+<div class="scrolling-text2"><h1>This is second example of AJAX</h1></div>
 <form name="incrform">
-    <input type = "text" name = "t1">
-    <input type="button" value = "Show Table" onClick="sendInfo()">
+    <input type="text" name="t1">
+    <input type="button" value="ShowTable" onClick="sendInfo()">
 </form>
-<span id = "sid"></span>
+<span id="sid"> </span>
+
+<script>
+    var request; // Define the request variable at a global scope
+
+    function sendInfo() {
+        var v = document.incrform.t1.value;
+        var url = "index.jsp?val=" + v;
+
+        if (window.XMLHttpRequest) {
+            request = new XMLHttpRequest();
+            console.log(request);
+        } else if (window.ActiveXObject) {
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        try {
+            request.onreadystatechange = getInfo;
+            request.open("GET", url, true);
+            request.send();
+        } catch (e) {
+            alert("Unable to connect to server");
+        }
+    }
+
+    function getInfo() {
+        if (request && request.readyState === 4) {
+            var val = request.responseText;
+            document.getElementById("sid").innerHTML= val;
+        }
+    }
+</script>
 </body>
 </html>
+ 
